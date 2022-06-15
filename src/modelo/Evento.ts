@@ -7,6 +7,7 @@ class Evento {
     fechaDesde:Date
     fechaHasta:Date
     titulo:string
+    id:string
 
     
     constructor(anfitrion: Usuario, invitados: Usuario[], fechaCreacion:Date,
@@ -17,6 +18,7 @@ class Evento {
         this.fechaDesde = fechaDesde;
         this.fechaHasta = fechaHasta;
         this.titulo = titulo;
+        this.id = anfitrion.dni+'-'+fechaDesde;
     }
     
 }

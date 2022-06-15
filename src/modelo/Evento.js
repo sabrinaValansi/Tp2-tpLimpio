@@ -6,6 +6,7 @@ class Evento {
         this.fechaDesde = fechaDesde;
         this.fechaHasta = fechaHasta;
         this.titulo = titulo;
+        this.id = anfitrion.dni + '-' + fechaDesde;
     }
 }
 export default Evento;

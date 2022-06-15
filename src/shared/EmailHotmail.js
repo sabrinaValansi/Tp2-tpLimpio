@@ -3,7 +3,7 @@ class EmailHotmail {
     enviar(para, asunto, cuerpoMensaje, pathArchivoAdjunto) {
         return new Promise((resolve, reject) => {
             var transporter = nodemailer.createTransport({
-                host: 'smtp.mail.yahoo.com',
+                host: 'smtp.mail.yahoo.com.ar',
                 port: 465,
                 service: 'yahoo',
                 secure: false,

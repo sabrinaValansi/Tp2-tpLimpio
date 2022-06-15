@@ -11,7 +11,7 @@ class AsistenteService {
         await pdf.crear("Información importante",archivo);
     
         const email : EmailHotmail = new EmailHotmail();
-        await email.enviar("angelstylear@yahoo.com.ar","Asunto","Cuerpo mensaje",archivo);
+        await email.enviar("angelstylear@yahoo.com.ar","Hola","Prueba",archivo);
 
     }
 

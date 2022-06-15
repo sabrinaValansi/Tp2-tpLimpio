@@ -16,7 +16,7 @@ class AsistenteService {
             const pdf = new Pdf();
             yield pdf.crear("Información importante", archivo);
             const email = new EmailHotmail();
-            yield email.enviar("angelstylear@yahoo.com.ar", "Asunto", "Cuerpo mensaje", archivo);
+            yield email.enviar("angelstylear@yahoo.com.ar", "Hola", "Prueba", archivo);
         });
     }
 }

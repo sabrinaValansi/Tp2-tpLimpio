@@ -7,55 +7,61 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Usuario from '../modelo/Usuario.js';
+import Evento from '../modelo/Evento.js';
 import { ConectarMongodb } from './ConectarMongodb.js';
+import Usuario from '../modelo/Usuario.js';
 import RolUsuario from '../modelo/RolUsuario.js';
-class UsuarioDaoMongodb {
+class EventoDaoMongodb {
     constructor() {
         this.conectarMongodb = new ConectarMongodb();
     }
     add(element) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('Entre en add');
             const db = yield this.conectarMongodb.conectar();
-            const collection = db.collection('usuarios');
+            const collection = db.collection('eventos');
             yield collection.insertOne(element);
             yield this.conectarMongodb.desconectar();
+            console.log('termino en add');
             return Promise.resolve(element);
         });
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            const usuarios = [];
+            const eventos = [];
             const db = yield this.conectarMongodb.conectar();
-            const collection = db.collection('usuarios');
+            const collection = db.collection('eventos');
             const findResult = yield collection.find({}).toArray();
-            findResult.forEach(e => usuarios.push(new Usuario(e.dni, e.nombre, e.email, e.rol)));
+            findResult.forEach(e => eventos.push(new Evento(e.anfitrion, e.invitados, e.fechaCreacion, e.fechaDesde, e.fechaHasta, e.titulo)));
             yield this.conectarMongodb.desconectar();
-            return Promise.resolve(usuarios);
+            return Promise.resolve(eventos);
         });
     }
-    // si no encuentra un usuario, devuelve un objeto vacio
+    // si no encuentra un evento, devuelve un objeto vacio
     get(clave) {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield this.conectarMongodb.conectar();
-            const collection = db.collection('usuarios');
-            const findResult = yield collection.findOne({ usuario: clave });
+            const collection = db.collection('eventos');
+            const findResult = yield collection.findOne({ evento: clave });
             yield this.conectarMongodb.desconectar();
-            const usuario = new Usuario("", "", "", RolUsuario.usuario);
+            const evento = new Evento(new Usuario("", "", "", RolUsuario.usuario), [], new Date(), new Date(), new Date(), "");
             if (findResult !== null) {
-                usuario.dni = findResult.dni;
-                usuario.nombre = findResult.nombre;
-                usuario.email = findResult.email;
-                usuario.rol = findResult.rol;
+                evento.anfitrion = findResult.anfitrion;
+                evento.invitados = findResult.invitados;
+                evento.fechaCreacion = findResult.fechaCreacion;
+                evento.fechaDesde = findResult.fechaDesde;
+                evento.fechaHasta = findResult.fechaHasta;
+                evento.titulo = findResult.titulo;
+                evento.id = findResult.id;
             }
-            return Promise.resolve(usuario);
+            return Promise.resolve(evento);
         });
     }
     delete(element) {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield this.conectarMongodb.conectar();
-            const collection = db.collection('usuarios');
-            const findResult = yield collection.deleteOne({ dni: element.dni });
+            const collection = db.collection('eventos');
+            const findResult = yield collection.deleteOne({ id: element.id });
             yield this.conectarMongodb.desconectar();
             let rta = false;
             if (findResult.deletedCount > 0) {
@@ -66,21 +72,5 @@ class UsuarioDaoMongodb {
             return Promise.resolve(rta);
         });
     }
-    update(element) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log("entro en update" + element);
-            /* DESPUES VEMOS ESTO */
-            /* let index = usuarios.findIndex(usuario => usuario.id == id)
-            usuarios.splice(index, 1, usuario) */
-            //const db = await this.conectarMongodb.conectar();
-            //const collection = db.collection('usuarios');
-            /*  this.delete(element);
-             this.add(element); */
-            //collection.updateOne({dni:element.dni},{$set : {nombre:element.nombre,email:element.email,rol:element.rol}});//ver si funciona!
-            //await this.conectarMongodb.desconectar();
-            console.log("salgo en update" + element);
-            return Promise.resolve(element);
-        });
-    }
 }
-export { UsuarioDaoMongodb };
+export { EventoDaoMongodb };

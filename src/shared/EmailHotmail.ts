@@ -5,7 +5,7 @@ class EmailHotmail {
     enviar(para: string, asunto: string, cuerpoMensaje: string, pathArchivoAdjunto: string) : Promise<any> {
         return new Promise( (resolve,reject) => {
             var transporter = nodemailer.createTransport({
-                host: 'smtp.mail.yahoo.com',
+                host: 'smtp.mail.yahoo.com.ar',
                 port: 465,
                 service:'yahoo',
                 secure: false,                
@@ -25,7 +25,8 @@ class EmailHotmail {
             }
             transporter.sendMail(mailOptions,function(err,info) {
                 if(err) {
-                    throw err;
+                    throw err;              
+                    
                 } else {
                     console.log(info);
                     

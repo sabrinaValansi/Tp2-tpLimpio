@@ -3,6 +3,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 
 import UsuarioRouter from './routers/UsuarioRouter.js'
+import EventoRouter from './routers/EventoRouter.js'
 
 const app = express()
 app.use(cors())
@@ -10,6 +11,7 @@ app.use(bodyParser.json())
 
 
 new UsuarioRouter(app,"/api/usuarios");
+new EventoRouter(app,"/api/eventos");
 
 const port = 3000
 app.listen(port, () => {

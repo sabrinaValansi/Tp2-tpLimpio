@@ -11,7 +11,7 @@ import { Pdf } from '../src/shared/Pdf.js';
 import { EventoDaoMongodb } from '../src/repository/EventoDaoMongodb.js';
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const archivo = `./output/prueba7.pdf`;
+        const archivo = `./output/prueba9.pdf`;
         const pdf = new Pdf();
         const eventoDaoMongodb = new EventoDaoMongodb();
         const eventos = yield eventoDaoMongodb.getAll();
@@ -19,8 +19,22 @@ function main() {
         function crearTexto(array) {
             return __awaiter(this, void 0, void 0, function* () {
                 let linea = "";
+                let saltoLinea = "<br/>";
+                let titulo = "<i><b><u>Listado de eventos</u></b></i>" + saltoLinea;
+                let item = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-";
+                linea = titulo;
                 array.forEach(element => {
-                    linea += element.anfitrion.nombre + '/n';
+                    linea += element.titulo + saltoLinea;
+                    linea += "Anfitron: ";
+                    linea += "<b>" + element.anfitrion.nombre + "</b>" + saltoLinea;
+                    linea += "Invitados:" + saltoLinea;
+                    for (let index = 0; index < element.invitados.length; index++) {
+                        const invitado = element.invitados[index].nombre;
+                        linea += item + invitado + saltoLinea;
+                    }
+                    linea += "Fecha inicio:" + element.fechaDesde + saltoLinea;
+                    linea += "Fecha finalizacion:" + element.fechaDesde + saltoLinea;
+                    linea += "----------------------------------------------" + saltoLinea;
                 });
                 return Promise.resolve(linea);
             });

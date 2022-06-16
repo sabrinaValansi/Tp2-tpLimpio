@@ -7,16 +7,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Email } from '../src/shared/Email.js';
 import { Pdf } from '../src/shared/Pdf.js';
+import { EventoDaoMongodb } from '../src/repository/EventoDaoMongodb.js';
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const archivo = `./output/prueba3.pdf`;
+        const archivo = `./output/prueba7.pdf`;
         const pdf = new Pdf();
-        yield pdf.crear("hola mundo", archivo);
-        const email = new Email();
-        email.enviar("sabrivalan@hotmail.com", "Asunto", "Cuerpo mensaje", archivo);
-        console.log('test');
+        const eventoDaoMongodb = new EventoDaoMongodb();
+        const eventos = yield eventoDaoMongodb.getAll();
+        const ev = crearTexto(eventos);
+        function crearTexto(array) {
+            return __awaiter(this, void 0, void 0, function* () {
+                let linea = "";
+                array.forEach(element => {
+                    linea += element.anfitrion.nombre + '/n';
+                });
+                return Promise.resolve(linea);
+            });
+        }
+        console.log(ev);
+        yield pdf.crear(yield ev, archivo);
+        /* const email : Email = new Email();
+        email.enviar("sabrivalan@hotmail.com","Asunto","Cuerpo mensaje",archivo);
+        console.log('test'); */
     });
 }
 main();

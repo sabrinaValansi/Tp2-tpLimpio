@@ -1,6 +1,8 @@
 class AsistenteVirtual {
-    constructor(nombre) {
+    constructor(nombre, email, password) {
+        this.email = email;
         this.nombre = nombre;
+        this.password = password;
         this.usuarios = [];
         this.eventos = [];
     }

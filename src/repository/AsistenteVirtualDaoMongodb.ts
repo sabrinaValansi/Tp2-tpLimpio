@@ -57,11 +57,11 @@ class AsistenteVirtualDaoMongodb implements Dao<AsistenteVirtual, string> {
         return Promise.resolve(rta);
     }
 
-     async addUsuario(element: Usuario): Promise<boolean> {
+     /* async addUsuario(element: Usuario): Promise<boolean> {
         
 
         return Promise.resolve(rta);
-    }
+    } */
 
 
 }

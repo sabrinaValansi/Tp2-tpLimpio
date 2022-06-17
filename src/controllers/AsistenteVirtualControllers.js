@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { AsistenteVirtualDaoMongodb } from '../repository/AsistenteVirtualDaoMongodb.js';
 import AsistenteVirtual from '../modelo/AsistenteVirtual.js';
+import { EventoDaoMongodb } from '../repository/EventoDaoMongodb.js';
 class AsistenteVirtualController {
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -27,6 +28,13 @@ class AsistenteVirtualController {
             const asistenteDaoMongodb = new AsistenteVirtualDaoMongodb();
             const asistente = new AsistenteVirtual("", req.params.email, "");
             res.status(200).send(yield asistenteDaoMongodb.delete(asistente));
+        });
+    }
+    addEvento(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('metodo add evento controller');
+            const eventoDaoMongodb = new EventoDaoMongodb();
+            res.status(200).send(yield eventoDaoMongodb.add(req.body));
         });
     }
 }

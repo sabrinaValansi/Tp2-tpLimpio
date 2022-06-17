@@ -3,10 +3,14 @@ import {Pdf} from '../src/shared/Pdf.js'
 import { EventoDaoMongodb } from '../src/repository/EventoDaoMongodb.js'
 
 import Evento from '../src/modelo/Evento.js';
+import AsistenteService from '../src/services/AsistenteService.js'
 
 async function main() {
 
-    const archivo = `./output/prueba9.pdf`
+    const asistenteService : AsistenteService = new AsistenteService();
+    asistenteService.procesar();
+
+    /* const archivo = `./output/prueba9.pdf`
     const archivo2=`./output/eventosAnfitrion2.pdf`
 
     const pdf : Pdf = new Pdf();
@@ -64,7 +68,7 @@ async function main() {
     console.log(ev);
     
     await pdf.crear(await ev,archivo);
-    await pdf.crear(await evAnf,archivo2);
+    await pdf.crear(await evAnf,archivo2); */
    
     /* const email : Email = new Email();
     email.enviar("sabrivalan@hotmail.com","Asunto","Cuerpo mensaje",archivo);

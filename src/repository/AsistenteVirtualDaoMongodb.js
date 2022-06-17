@@ -12,6 +12,11 @@ import { ConectarMongodb } from './ConectarMongodb.js';
 class AsistenteVirtualDaoMongodb {
     constructor() {
         this.conectarMongodb = new ConectarMongodb();
+        /* async addUsuario(element: Usuario): Promise<boolean> {
+           
+   
+           return Promise.resolve(rta);
+       } */
     }
     add(element) {
         return __awaiter(this, void 0, void 0, function* () {

@@ -39,7 +39,7 @@ class UsuarioDaoMongodb {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield this.conectarMongodb.conectar();
             const collection = db.collection('usuarios');
-            const findResult = yield collection.findOne({ usuario: clave });
+            const findResult = yield collection.findOne({ dni: clave });
             yield this.conectarMongodb.desconectar();
             const usuario = new Usuario("", "", "", RolUsuario.usuario);
             if (findResult !== null) {

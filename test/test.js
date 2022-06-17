@@ -12,12 +12,12 @@ import { EventoDaoMongodb } from '../src/repository/EventoDaoMongodb.js';
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const archivo = `./output/prueba9.pdf`;
-        const archivo2 = `./output/eventosAnfitrion.pdf`;
+        const archivo2 = `./output/eventosAnfitrion2.pdf`;
         const pdf = new Pdf();
         const eventoDaoMongodb = new EventoDaoMongodb();
         const eventos = yield eventoDaoMongodb.getAll();
         const ev = crearTexto(eventos);
-        const evAnf = crearTextoAnfitrion(eventos, "1234");
+        const evAnf = crearTextoAnfitrion(eventos, "3333");
         function crearTexto(array) {
             return __awaiter(this, void 0, void 0, function* () {
                 let linea = "";
@@ -66,7 +66,7 @@ function main() {
             });
         }
         console.log(ev);
-        //await pdf.crear(await ev,archivo);
+        yield pdf.crear(yield ev, archivo);
         yield pdf.crear(yield evAnf, archivo2);
         /* const email : Email = new Email();
         email.enviar("sabrivalan@hotmail.com","Asunto","Cuerpo mensaje",archivo);

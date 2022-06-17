@@ -28,7 +28,7 @@ class UsuarioDaoMongodb implements Dao<Usuario, string> {
     async get(clave: string): Promise<Usuario> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('usuarios');
-        const findResult = await collection.findOne({ usuario: clave });
+        const findResult = await collection.findOne({ dni: clave });
         await this.conectarMongodb.desconectar();
         const usuario = new Usuario("", "", "", RolUsuario.usuario);
         if (findResult !== null) {

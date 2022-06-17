@@ -7,13 +7,13 @@ import Evento from '../src/modelo/Evento.js';
 async function main() {
 
     const archivo = `./output/prueba9.pdf`
-    const archivo2=`./output/eventosAnfitrion.pdf`
+    const archivo2=`./output/eventosAnfitrion2.pdf`
 
     const pdf : Pdf = new Pdf();
     const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();
     const eventos: Evento[] = await eventoDaoMongodb.getAll();
     const ev = crearTexto(eventos);
-    const evAnf=crearTextoAnfitrion(eventos,"1234")
+    const evAnf=crearTextoAnfitrion(eventos,"3333")
 
     
    async function crearTexto(array: Evento[]):Promise<string> {
@@ -63,7 +63,7 @@ async function main() {
 
     console.log(ev);
     
-    //await pdf.crear(await ev,archivo);
+    await pdf.crear(await ev,archivo);
     await pdf.crear(await evAnf,archivo2);
    
     /* const email : Email = new Email();

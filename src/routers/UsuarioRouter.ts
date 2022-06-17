@@ -11,6 +11,9 @@ class UsuarioRouter {
     }
     configurarRutas() {
         this.app.route(this.nombre).get(UsuarioControllers.listar); 
+        this.app.route(this.nombre + "/:dni").
+        get(UsuarioControllers.listaruno); 
+        
         this.app.route(this.nombre).post(UsuarioControllers.add);   
         this.app.route(this.nombre).put(UsuarioControllers.update);   
 

@@ -8,17 +8,22 @@ class Evento {
     fechaHasta:Date
     titulo:string
     id:string
+   /*  diaDesde:string
+    mesDesde:string
+    anoDesde:string
+    horaDesde:string
+    minDesde:string */
 
     
     constructor(anfitrion: Usuario, invitados: Usuario[], fechaCreacion:Date,
-        fechaDesde:Date, fechaHasta:Date, titulo:string ) {
+        fechaDesde:Date, fechaHasta:Date, titulo:string,id:string ) {
         this.anfitrion = anfitrion;    
         this.invitados = invitados;
         this.fechaCreacion = fechaCreacion;
         this.fechaDesde = fechaDesde;
         this.fechaHasta = fechaHasta;
         this.titulo = titulo;
-        this.id = anfitrion.dni+'-'+fechaDesde;
+        this.id = id
     }
     
 }

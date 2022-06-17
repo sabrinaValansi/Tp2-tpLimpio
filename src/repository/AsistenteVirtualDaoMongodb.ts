@@ -1,6 +1,8 @@
 import AsistenteVirtual from '../modelo/AsistenteVirtual.js';
 import Dao from './Dao.js'
 import { ConectarMongodb } from './ConectarMongodb.js'
+import { UsuarioDaoMongodb } from './UsuarioDaoMongodb.js';
+import Evento from '../modelo/Evento.js';
 
 
 class AsistenteVirtualDaoMongodb implements Dao<AsistenteVirtual, string> {
@@ -55,8 +57,11 @@ class AsistenteVirtualDaoMongodb implements Dao<AsistenteVirtual, string> {
         return Promise.resolve(rta);
     }
 
-    
+     async addUsuario(element: Usuario): Promise<boolean> {
+        
 
+        return Promise.resolve(rta);
+    }
 
 
 }

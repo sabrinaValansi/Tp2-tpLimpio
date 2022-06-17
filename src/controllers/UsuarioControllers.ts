@@ -10,6 +10,11 @@ class UsuarioController {
         res.status(200).send( await usuarioDaoMongodb.getAll());
     }
 
+    async listaruno(req: express.Request, res: express.Response) {
+        const usuarioDaoMongodb : UsuarioDaoMongodb = new UsuarioDaoMongodb();
+        res.status(200).send( await usuarioDaoMongodb.get(req.params.dni));
+    }
+
     async add(req: express.Request, res: express.Response) {
         const usuarioDaoMongodb : UsuarioDaoMongodb = new UsuarioDaoMongodb();
         res.status(200).send( await usuarioDaoMongodb.add(req.body));

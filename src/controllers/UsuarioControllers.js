@@ -17,6 +17,12 @@ class UsuarioController {
             res.status(200).send(yield usuarioDaoMongodb.getAll());
         });
     }
+    listaruno(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const usuarioDaoMongodb = new UsuarioDaoMongodb();
+            res.status(200).send(yield usuarioDaoMongodb.get(req.params.dni));
+        });
+    }
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const usuarioDaoMongodb = new UsuarioDaoMongodb();

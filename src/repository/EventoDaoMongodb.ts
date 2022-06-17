@@ -23,7 +23,7 @@ class EventoDaoMongodb implements Dao<Evento, string> {
         const collection = db.collection('eventos');
         const findResult = await collection.find({}).toArray();
         findResult.forEach(e => eventos.push(new Evento(e.anfitrion, e.invitados,e.fechaCreacion,e.fechaDesde,
-            e.fechaHasta,e.titulo)));
+            e.fechaHasta,e.titulo,e.id)));
         await this.conectarMongodb.desconectar();
         return Promise.resolve(eventos);
     }
@@ -34,7 +34,7 @@ class EventoDaoMongodb implements Dao<Evento, string> {
         const collection = db.collection('eventos');
         const findResult = await collection.findOne({ evento: clave });
         await this.conectarMongodb.desconectar();
-        const evento = new Evento(new Usuario("", "", "", RolUsuario.usuario),[],new Date(), new Date(),new Date(),"");
+        const evento = new Evento(new Usuario("", "", "", RolUsuario.usuario),[],new Date(), new Date(),new Date(),"","");
         if (findResult !== null) {
             evento.anfitrion = findResult.anfitrion;
             evento.invitados = findResult.invitados;
@@ -51,6 +51,8 @@ class EventoDaoMongodb implements Dao<Evento, string> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('eventos');
         const findResult = await collection.deleteOne({ id: element.id });
+        console.log('para ver si ssle id'+findResult);
+        
         await this.conectarMongodb.desconectar();
         let rta = false;
         if (findResult.deletedCount > 0) {

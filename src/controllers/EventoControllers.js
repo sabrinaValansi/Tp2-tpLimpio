@@ -8,6 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { EventoDaoMongodb } from '../repository/EventoDaoMongodb.js';
+import Evento from '../modelo/Evento.js';
+import RolUsuario from '../modelo/RolUsuario.js';
+import Usuario from '../modelo/Usuario.js';
 class EventoController {
     listar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -24,13 +27,10 @@ class EventoController {
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            /* const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();
-            const evento:Evento = new Evento(req.params.anfitrion,[],new Date(), new Date(),new Date(),"");
-            
-            const usuario:Usuario = new Usuario(req.params.dni,"","",RolUsuario.usuario);
-            
-            new Evento(new Usuario("", "", "", RolUsuario.usuario),[],new Date(), new Date(),new Date(),"");
-            res.status(200).send( await eventoDaoMongodb.delete(evento)); */
+            const eventoDaoMongodb = new EventoDaoMongodb();
+            const usuario = new Usuario("", "", "", RolUsuario.usuario);
+            const evento = new Evento(usuario, [], new Date(), new Date(), new Date(), "", req.params.id);
+            res.status(200).send(yield eventoDaoMongodb.delete(evento));
         });
     }
 }

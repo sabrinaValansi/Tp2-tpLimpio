@@ -19,13 +19,11 @@ class EventoController {
     }
     
     async delete(req: express.Request, res: express.Response) {
-        /* const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();
-        const evento:Evento = new Evento(req.params.anfitrion,[],new Date(), new Date(),new Date(),"");
+        const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();
         
-        const usuario:Usuario = new Usuario(req.params.dni,"","",RolUsuario.usuario);
-        
-        new Evento(new Usuario("", "", "", RolUsuario.usuario),[],new Date(), new Date(),new Date(),"");
-        res.status(200).send( await eventoDaoMongodb.delete(evento)); */
+        const usuario:Usuario = new Usuario("","","",RolUsuario.usuario);
+        const evento:Evento = new Evento(usuario,[], new Date(),new Date(),new Date(),"",req.params.id);
+        res.status(200).send( await eventoDaoMongodb.delete(evento));
     } 
 
     /* async update(req: express.Request, res: express.Response) {

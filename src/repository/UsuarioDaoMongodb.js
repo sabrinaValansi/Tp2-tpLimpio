@@ -56,6 +56,7 @@ class UsuarioDaoMongodb {
             const db = yield this.conectarMongodb.conectar();
             const collection = db.collection('usuarios');
             const findResult = yield collection.deleteOne({ dni: element.dni });
+            console.log('para ver si ssle id' + findResult.deletedCount);
             yield this.conectarMongodb.desconectar();
             let rta = false;
             if (findResult.deletedCount > 0) {

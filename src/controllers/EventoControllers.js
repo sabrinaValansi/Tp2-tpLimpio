@@ -18,6 +18,12 @@ class EventoController {
             res.status(200).send(yield eventoDaoMongodb.getAll());
         });
     }
+    listaruno(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const eventoDaoMongodb = new EventoDaoMongodb();
+            res.status(200).send(yield eventoDaoMongodb.get(req.params.id));
+        });
+    }
     add(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('metodo add evento controller');
@@ -30,6 +36,7 @@ class EventoController {
             const eventoDaoMongodb = new EventoDaoMongodb();
             const usuario = new Usuario("", "", "", RolUsuario.usuario);
             const evento = new Evento(usuario, [], new Date(), new Date(), new Date(), "", req.params.id);
+            console.log('entro a delete de controller' + evento.id);
             res.status(200).send(yield eventoDaoMongodb.delete(evento));
         });
     }

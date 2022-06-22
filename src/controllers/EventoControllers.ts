@@ -11,6 +11,11 @@ class EventoController {
         res.status(200).send( await eventoDaoMongodb.getAll());
     }
 
+    async listaruno(req: express.Request, res: express.Response) {
+        const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();
+        res.status(200).send( await eventoDaoMongodb.get(req.params.id));
+    }
+
     async add(req: express.Request, res: express.Response) {
         console.log('metodo add evento controller');
         
@@ -18,13 +23,18 @@ class EventoController {
         res.status(200).send( await eventoDaoMongodb.add(req.body));
     }
     
-    async delete(req: express.Request, res: express.Response) {
-        const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();
-        
+    async delete(req: express.Request, res: express.Response) {     
+        const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();  
         const usuario:Usuario = new Usuario("","","",RolUsuario.usuario);
         const evento:Evento = new Evento(usuario,[], new Date(),new Date(),new Date(),"",req.params.id);
+        console.log('entro a delete de controller' + evento.id);
         res.status(200).send( await eventoDaoMongodb.delete(evento));
     } 
+    
+
+
+
+
 
     /* async update(req: express.Request, res: express.Response) {
         const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();

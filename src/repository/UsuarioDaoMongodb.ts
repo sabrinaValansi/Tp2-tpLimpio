@@ -44,6 +44,7 @@ class UsuarioDaoMongodb implements Dao<Usuario, string> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('usuarios');
         const findResult = await collection.deleteOne({ dni: element.dni });
+        console.log('para ver si ssle id'+ findResult.deletedCount);
         await this.conectarMongodb.desconectar();
         let rta = false;
         if (findResult.deletedCount > 0) {

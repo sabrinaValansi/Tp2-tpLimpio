@@ -57,12 +57,27 @@ class EventoDaoMongodb {
             return Promise.resolve(evento);
         });
     }
+    /* async delete(element: Evento): Promise<boolean> {
+        const db = await this.conectarMongodb.conectar();
+        const collection = db.collection('eventos');
+        const findResult = await collection.deleteOne({ id: element.id });
+
+        console.log('para ver si ssle id'+ findResult.deletedCount);
+        await this.conectarMongodb.desconectar();
+        let rta = false;
+        if (findResult.deletedCount > 0) {
+            rta = true;
+        }
+        console.log("Estado de rta " + rta);
+        await this.conectarMongodb.desconectar();
+        return Promise.resolve(rta);
+    } */
     delete(element) {
         return __awaiter(this, void 0, void 0, function* () {
             const db = yield this.conectarMongodb.conectar();
             const collection = db.collection('eventos');
             const findResult = yield collection.deleteOne({ id: element.id });
-            console.log('para ver si ssle id' + findResult);
+            console.log('para ver si ssle id' + findResult.deletedCount);
             yield this.conectarMongodb.desconectar();
             let rta = false;
             if (findResult.deletedCount > 0) {

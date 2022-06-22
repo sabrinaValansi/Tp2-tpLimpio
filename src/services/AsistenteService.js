@@ -12,6 +12,7 @@ import { EventoDaoMongodb } from '../repository/EventoDaoMongodb.js';
 class AsistenteService {
     procesar() {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('Entro en procesar');
             const archivo = `./output/Informe.pdf`;
             const pdf = new Pdf();
             const eventoDaoMongodb = new EventoDaoMongodb();
@@ -43,6 +44,43 @@ class AsistenteService {
                 linea += "----------------------------------------------" + saltoLinea;
             });
             console.log('archivo creado');
+            return Promise.resolve(linea);
+        });
+    }
+    procesarUno(dniAnf) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('Entro en procesar');
+            const archivo = `./output/InformeAnfitrion.pdf`;
+            const pdf = new Pdf();
+            const eventoDaoMongodb = new EventoDaoMongodb();
+            const eventos = yield eventoDaoMongodb.getAll();
+            //const ev = this.crearTexto(eventos);
+            const evAnf = this.crearTextoAnfitrion(eventos, dniAnf);
+            //await pdf.crear(await ev,archivo);  
+            yield pdf.crear(yield evAnf, archivo);
+        });
+    }
+    crearTextoAnfitrion(array, dni) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let linea = "";
+            let saltoLinea = "<br/>";
+            let titulo = "<i><b><u>Listado de eventos para </u></b></i>";
+            let item = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-";
+            const anf = array.find(element => element.anfitrion.dni === dni);
+            linea = titulo + "<i><b><u>" + (anf === null || anf === void 0 ? void 0 : anf.anfitrion.nombre) + ":</u></b></i>" + saltoLinea;
+            array.forEach(element => {
+                if (element.anfitrion.dni === dni) {
+                    linea += element.titulo + saltoLinea;
+                    linea += "Invitados:" + saltoLinea;
+                    for (let index = 0; index < element.invitados.length; index++) {
+                        const invitado = element.invitados[index].nombre;
+                        linea += item + invitado + saltoLinea;
+                    }
+                    linea += "Fecha inicio:" + element.fechaDesde + saltoLinea;
+                    linea += "Fecha finalizacion:" + element.fechaDesde + saltoLinea;
+                    linea += "----------------------------------------------" + saltoLinea;
+                }
+            });
             return Promise.resolve(linea);
         });
     }

@@ -11,6 +11,8 @@ class EventoRouter {
     }
     configurarRutas() {
         this.app.route(this.nombre).get(EventoControllers.listar); 
+        this.app.route(this.nombre + "/:id").
+        get(EventoControllers.listaruno); 
         this.app.route(this.nombre).post(EventoControllers.add);   
         console.log('entro en configurar rutas');
         

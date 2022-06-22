@@ -47,12 +47,26 @@ class EventoDaoMongodb implements Dao<Evento, string> {
         return Promise.resolve(evento);
     }
 
+    /* async delete(element: Evento): Promise<boolean> {
+        const db = await this.conectarMongodb.conectar();
+        const collection = db.collection('eventos');
+        const findResult = await collection.deleteOne({ id: element.id });
+
+        console.log('para ver si ssle id'+ findResult.deletedCount);
+        await this.conectarMongodb.desconectar();
+        let rta = false;
+        if (findResult.deletedCount > 0) {
+            rta = true;
+        }
+        console.log("Estado de rta " + rta);
+        await this.conectarMongodb.desconectar();
+        return Promise.resolve(rta);
+    } */
     async delete(element: Evento): Promise<boolean> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('eventos');
         const findResult = await collection.deleteOne({ id: element.id });
-        console.log('para ver si ssle id'+findResult);
-        
+        console.log('para ver si ssle id'+ findResult.deletedCount);
         await this.conectarMongodb.desconectar();
         let rta = false;
         if (findResult.deletedCount > 0) {
@@ -62,5 +76,8 @@ class EventoDaoMongodb implements Dao<Evento, string> {
         await this.conectarMongodb.desconectar();
         return Promise.resolve(rta);
     }
+
+
+
 }
 export { EventoDaoMongodb }

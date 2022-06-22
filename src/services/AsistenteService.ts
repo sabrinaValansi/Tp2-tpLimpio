@@ -15,7 +15,7 @@ class AsistenteService {
         const ev = this.crearTexto(eventos);
         //const evAnf=this.crearTextoAnfitrion(eventos,"3333")
 
-        await pdf.crear(await ev,archivo);
+        await pdf.crear(await ev,archivo);  
         //await pdf.crear(await evAnf,archivo2);
     }
     

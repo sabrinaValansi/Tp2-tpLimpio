@@ -70,9 +70,7 @@ async function main() {
     await pdf.crear(await ev,archivo);
     await pdf.crear(await evAnf,archivo2); */
    
-    /* const email : Email = new Email();
-    email.enviar("sabrivalan@hotmail.com","Asunto","Cuerpo mensaje",archivo);
-    console.log('test'); */
+    
 
 }
 

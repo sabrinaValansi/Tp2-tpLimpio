@@ -5,19 +5,19 @@ class Email {
     enviar(para: string, asunto: string, cuerpoMensaje: string, pathArchivoAdjunto: string) : Promise<any> {
         return new Promise( (resolve,reject) => {
             var transporter = nodemailer.createTransport({
-                host: 'smtp.mail.yahoo.com.ar',
+                host: 'smtp.mail.yahoo.com',
                 port: 465,
                 service:'yahoo',
                 secure: false,                
                 auth: {
-                    user: 'angelstylear@yahoo.com.ar',
-                    pass: 'LE4558763'    
+                    user: 'adrianutnnode2019@yahoo.com',
+                    pass: 'czrextadalosyqhy'    
                 },
                 debug: false,
                 logger: true 
             });
             const mailOptions = {
-                from : 'angelstylear@yahoo.com.ar',
+                from : 'adrianutnnode2019@yahoo.com',
                 to: para,
                 subject: asunto,
                 text: cuerpoMensaje,
@@ -25,7 +25,6 @@ class Email {
             }
             transporter.sendMail(mailOptions,function(err,info) {
                 if(err) {
-                    console.log('El error es'+ err);                    
                     throw err;
                 } else {
                     console.log(info);

@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { Email } from '../shared/Email.js';
 import { Pdf } from '../shared/Pdf.js';
 import { EventoDaoMongodb } from '../repository/EventoDaoMongodb.js';
 class AsistenteService {
@@ -20,6 +21,9 @@ class AsistenteService {
             const ev = this.crearTexto(eventos);
             //const evAnf=this.crearTextoAnfitrion(eventos,"3333")
             yield pdf.crear(yield ev, archivo);
+            const email = new Email();
+            email.enviar("sabrivalan@hotmail.com", "Asunto", "Cuerpo mensaje", archivo);
+            console.log('test');
             //await pdf.crear(await evAnf,archivo2);
         });
     }
@@ -40,7 +44,7 @@ class AsistenteService {
                     linea += item + invitado + saltoLinea;
                 }
                 linea += "Fecha inicio:" + element.fechaDesde + saltoLinea;
-                linea += "Fecha finalizacion:" + element.fechaDesde + saltoLinea;
+                linea += "Fecha finalizacion:" + element.fechaHasta + saltoLinea;
                 linea += "----------------------------------------------" + saltoLinea;
             });
             console.log('archivo creado');
@@ -58,6 +62,9 @@ class AsistenteService {
             const evAnf = this.crearTextoAnfitrion(eventos, dniAnf);
             //await pdf.crear(await ev,archivo);  
             yield pdf.crear(yield evAnf, archivo);
+            const email = new Email();
+            email.enviar("sabrivalan@hotmail.com", "Informe de Asistente", "Adjuntamos sus eventos personales", archivo);
+            console.log('test2');
         });
     }
     crearTextoAnfitrion(array, dni) {
@@ -77,7 +84,7 @@ class AsistenteService {
                         linea += item + invitado + saltoLinea;
                     }
                     linea += "Fecha inicio:" + element.fechaDesde + saltoLinea;
-                    linea += "Fecha finalizacion:" + element.fechaDesde + saltoLinea;
+                    linea += "Fecha finalizacion:" + element.fechaHasta + saltoLinea;
                     linea += "----------------------------------------------" + saltoLinea;
                 }
             });

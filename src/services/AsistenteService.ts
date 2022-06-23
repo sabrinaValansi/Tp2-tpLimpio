@@ -1,4 +1,4 @@
-import {EmailHotmail} from '../shared/EmailHotmail.js'
+import {Email} from '../shared/Email.js'
 import {Pdf} from '../shared/Pdf.js'
 import { EventoDaoMongodb } from '../repository/EventoDaoMongodb.js';
 import Evento from '../modelo/Evento.js';
@@ -17,6 +17,9 @@ class AsistenteService {
         //const evAnf=this.crearTextoAnfitrion(eventos,"3333")
 
         await pdf.crear(await ev,archivo);  
+        const email : Email = new Email();
+        email.enviar("sabrivalan@hotmail.com","Asunto","Cuerpo mensaje",archivo);
+        console.log('test');
         //await pdf.crear(await evAnf,archivo2);
     }
     
@@ -36,7 +39,7 @@ class AsistenteService {
                 linea+=item+invitado+saltoLinea
             }
             linea+="Fecha inicio:"+element.fechaDesde+saltoLinea
-            linea+="Fecha finalizacion:"+element.fechaDesde+saltoLinea
+            linea+="Fecha finalizacion:"+element.fechaHasta+saltoLinea
             linea+="----------------------------------------------"+saltoLinea
         });
         console.log('archivo creado');
@@ -56,6 +59,9 @@ class AsistenteService {
 
         //await pdf.crear(await ev,archivo);  
         await pdf.crear(await evAnf,archivo);
+        const email : Email = new Email();
+        email.enviar("sabrivalan@hotmail.com","Informe de Asistente","Adjuntamos sus eventos personales",archivo);
+        console.log('test2');
     }
 
     async crearTextoAnfitrion(array: Evento[],dni:string):Promise<string> {
@@ -75,7 +81,7 @@ class AsistenteService {
                     linea+=item+invitado+saltoLinea
                 }
                 linea+="Fecha inicio:"+element.fechaDesde+saltoLinea
-                linea+="Fecha finalizacion:"+element.fechaDesde+saltoLinea
+                linea+="Fecha finalizacion:"+element.fechaHasta+saltoLinea
                 linea+="----------------------------------------------"+saltoLinea
             }
         });

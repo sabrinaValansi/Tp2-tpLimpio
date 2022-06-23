@@ -5,7 +5,7 @@ import Evento from '../modelo/Evento.js';
 
 class AsistenteService {
 
-    async procesar(){
+    async procesar(emailEnv : string){
         var now = new Date();
 
         const archivo = './output/Informe-'+ now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate()+ "-" + now.getHours() + "-" + now.getMinutes() +'.pdf'
@@ -18,7 +18,7 @@ class AsistenteService {
 
         await pdf.crear(await ev,archivo);  
         const email : Email = new Email();
-        email.enviar("sabrivalan@hotmail.com","Informe de eventos","Adjuntamos los eventos creados",archivo);
+        email.enviar(emailEnv,"Informe de eventos","Adjuntamos los eventos creados",archivo);
         //await pdf.crear(await evAnf,archivo2);
     }
     
@@ -31,7 +31,7 @@ class AsistenteService {
         array.forEach(element => {
             linea+=element.titulo+saltoLinea
             linea+="Anfitron: "
-            linea+="<b>"+element.anfitrion.dni+"</b>"+saltoLinea
+            linea+="<b>"+element.anfitrion.nombre+"</b>"+saltoLinea
             linea+="Invitados:"+saltoLinea
             for (let index = 0; index < element.invitados.length; index++) {
                 const invitado = element.invitados[index].nombre;

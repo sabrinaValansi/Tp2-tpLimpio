@@ -11,9 +11,8 @@ import { Email } from '../shared/Email.js';
 import { Pdf } from '../shared/Pdf.js';
 import { EventoDaoMongodb } from '../repository/EventoDaoMongodb.js';
 class AsistenteService {
-    procesar() {
+    procesar(emailEnv) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('Entro en procesar');
             var now = new Date();
             const archivo = './output/Informe-' + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + '.pdf';
             const pdf = new Pdf();
@@ -23,8 +22,7 @@ class AsistenteService {
             //const evAnf=this.crearTextoAnfitrion(eventos,"3333")
             yield pdf.crear(yield ev, archivo);
             const email = new Email();
-            email.enviar("sabrivalan@hotmail.com", "Informe de eventos", "Adjuntamos los eventos creados", archivo);
-            console.log('test');
+            email.enviar(emailEnv, "Informe de eventos", "Adjuntamos los eventos creados", archivo);
             //await pdf.crear(await evAnf,archivo2);
         });
     }
@@ -38,7 +36,7 @@ class AsistenteService {
             array.forEach(element => {
                 linea += element.titulo + saltoLinea;
                 linea += "Anfitron: ";
-                linea += "<b>" + element.anfitrion.dni + "</b>" + saltoLinea;
+                linea += "<b>" + element.anfitrion.nombre + "</b>" + saltoLinea;
                 linea += "Invitados:" + saltoLinea;
                 for (let index = 0; index < element.invitados.length; index++) {
                     const invitado = element.invitados[index].nombre;
@@ -48,13 +46,11 @@ class AsistenteService {
                 linea += "Fecha finalizacion:" + element.fechaHasta + saltoLinea;
                 linea += "----------------------------------------------" + saltoLinea;
             });
-            console.log('archivo creado');
             return Promise.resolve(linea);
         });
     }
     procesarUno(dniAnf) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('Entro en procesar');
             var now = new Date();
             //var time = now.getTime();
             const archivo = './output/InformeAnfitrion-' + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + '.pdf';
@@ -67,7 +63,6 @@ class AsistenteService {
             yield pdf.crear(yield evAnf, archivo);
             const email = new Email();
             email.enviar("sabrivalan@hotmail.com", "Informe de Asistente", "Adjuntamos sus eventos personales", archivo);
-            console.log('test2');
         });
     }
     crearTextoAnfitrion(array, dni) {

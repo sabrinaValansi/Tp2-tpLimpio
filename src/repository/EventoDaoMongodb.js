@@ -17,12 +17,10 @@ class EventoDaoMongodb {
     }
     add(element) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('Entre en add');
             const db = yield this.conectarMongodb.conectar();
             const collection = db.collection('eventos');
             yield collection.insertOne(element);
             yield this.conectarMongodb.desconectar();
-            console.log('termino en add');
             return Promise.resolve(element);
         });
     }
@@ -77,13 +75,11 @@ class EventoDaoMongodb {
             const db = yield this.conectarMongodb.conectar();
             const collection = db.collection('eventos');
             const findResult = yield collection.deleteOne({ id: element.id });
-            console.log('para ver si ssle id' + findResult.deletedCount);
             yield this.conectarMongodb.desconectar();
             let rta = false;
             if (findResult.deletedCount > 0) {
                 rta = true;
             }
-            console.log("Estado de rta " + rta);
             yield this.conectarMongodb.desconectar();
             return Promise.resolve(rta);
         });

@@ -8,8 +8,8 @@ class GenerarPdfController {
         try{
             const asistenteService : AsistenteService = new AsistenteService();
             
-            asistenteService.procesar();            
-            res.status(200).send( "ok");
+            asistenteService.procesar(req.params.email);            
+            res.status(200).send( "Informe general enviado por correo electronico a: " + req.params.email);
         }catch{
             res.status(404).send( "error");
         }
@@ -20,7 +20,7 @@ class GenerarPdfController {
             const asistenteService : AsistenteService = new AsistenteService();
             
             asistenteService.procesarUno(req.params.dni);            
-            res.status(200).send( "ok");
+            res.status(200).send( "Informe personal enviado por correo electronico");
         }catch{
             res.status(404).send( "error");
         }

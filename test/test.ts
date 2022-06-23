@@ -8,7 +8,7 @@ import AsistenteService from '../src/services/AsistenteService.js'
 async function main() {
 
     const asistenteService : AsistenteService = new AsistenteService();
-    asistenteService.procesar();
+    asistenteService.procesar("sabrivalan@hotmail.com");
 
     /* const archivo = `./output/prueba9.pdf`
     const archivo2=`./output/eventosAnfitrion2.pdf`

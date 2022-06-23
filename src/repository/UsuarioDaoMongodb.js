@@ -56,20 +56,17 @@ class UsuarioDaoMongodb {
             const db = yield this.conectarMongodb.conectar();
             const collection = db.collection('usuarios');
             const findResult = yield collection.deleteOne({ dni: element.dni });
-            console.log('para ver si ssle id' + findResult.deletedCount);
             yield this.conectarMongodb.desconectar();
             let rta = false;
             if (findResult.deletedCount > 0) {
                 rta = true;
             }
-            console.log("Estado de rta " + rta);
             yield this.conectarMongodb.desconectar();
             return Promise.resolve(rta);
         });
     }
     update(element) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("entro en update" + element);
             /* DESPUES VEMOS ESTO */
             /* let index = usuarios.findIndex(usuario => usuario.id == id)
             usuarios.splice(index, 1, usuario) */
@@ -79,7 +76,6 @@ class UsuarioDaoMongodb {
              this.add(element); */
             //collection.updateOne({dni:element.dni},{$set : {nombre:element.nombre,email:element.email,rol:element.rol}});//ver si funciona!
             //await this.conectarMongodb.desconectar();
-            console.log("salgo en update" + element);
             return Promise.resolve(element);
         });
     }

@@ -8,11 +8,6 @@ class Evento {
     fechaHasta:Date
     titulo:string
     id:string
-   /*  diaDesde:string
-    mesDesde:string
-    anoDesde:string
-    horaDesde:string
-    minDesde:string */
 
     
     constructor(anfitrion: Usuario, invitados: Usuario[], fechaCreacion:Date,

@@ -1,9 +1,4 @@
 class Evento {
-    /*  diaDesde:string
-     mesDesde:string
-     anoDesde:string
-     horaDesde:string
-     minDesde:string */
     constructor(anfitrion, invitados, fechaCreacion, fechaDesde, fechaHasta, titulo, id) {
         this.anfitrion = anfitrion;
         this.invitados = invitados;

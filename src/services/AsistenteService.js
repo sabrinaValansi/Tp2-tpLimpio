@@ -11,7 +11,7 @@ import { Email } from '../shared/Email.js';
 import { Pdf } from '../shared/Pdf.js';
 import { EventoDaoMongodb } from '../repository/EventoDaoMongodb.js';
 class AsistenteService {
-    procesar(emailEnv) {
+    procesar() {
         return __awaiter(this, void 0, void 0, function* () {
             var now = new Date();
             const archivo = './output/Informe-' + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + '.pdf';
@@ -22,7 +22,7 @@ class AsistenteService {
             //const evAnf=this.crearTextoAnfitrion(eventos,"3333")
             yield pdf.crear(yield ev, archivo);
             const email = new Email();
-            email.enviar(emailEnv, "Informe de eventos", "Adjuntamos los eventos creados", archivo);
+            email.enviar("sabrivalan@hotmail.com", "Informe de eventos", "Adjuntamos los eventos creados", archivo);
             //await pdf.crear(await evAnf,archivo2);
         });
     }

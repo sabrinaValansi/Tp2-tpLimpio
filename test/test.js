@@ -11,7 +11,7 @@ import AsistenteService from '../src/services/AsistenteService.js';
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const asistenteService = new AsistenteService();
-        asistenteService.procesar("sabrivalan@hotmail.com");
+        asistenteService.procesar();
         /* const archivo = `./output/prueba9.pdf`
         const archivo2=`./output/eventosAnfitrion2.pdf`
     

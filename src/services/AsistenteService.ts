@@ -5,7 +5,7 @@ import Evento from '../modelo/Evento.js';
 
 class AsistenteService {
 
-    async procesar(emailEnv : string){
+    async procesar(){
         var now = new Date();
 
         const archivo = './output/Informe-'+ now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate()+ "-" + now.getHours() + "-" + now.getMinutes() +'.pdf'
@@ -18,7 +18,7 @@ class AsistenteService {
 
         await pdf.crear(await ev,archivo);  
         const email : Email = new Email();
-        email.enviar(emailEnv,"Informe de eventos","Adjuntamos los eventos creados",archivo);
+        email.enviar("sabrivalan@hotmail.com","Informe de eventos","Adjuntamos los eventos creados",archivo);
         //await pdf.crear(await evAnf,archivo2);
     }
     

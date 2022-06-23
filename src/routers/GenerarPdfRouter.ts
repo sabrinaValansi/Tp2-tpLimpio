@@ -10,8 +10,7 @@ class GenerarPdfRouter {
         this.configurarRutas();
     }
     configurarRutas() {
-        this.app.route(this.nombre + "/:email").
-        get(GenerarPdfControllers.listarEventos); 
+        this.app.route(this.nombre).get(GenerarPdfControllers.listarEventos); 
         this.app.route(this.nombre + "/:dni").
         get(GenerarPdfControllers.listarEventosAnfitrion); 
         return this.app;

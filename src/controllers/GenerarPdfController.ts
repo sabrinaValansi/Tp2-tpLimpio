@@ -8,8 +8,8 @@ class GenerarPdfController {
         try{
             const asistenteService : AsistenteService = new AsistenteService();
             
-            asistenteService.procesar(req.params.email);            
-            res.status(200).send( "Informe general enviado por correo electronico a: " + req.params.email);
+            asistenteService.procesar();            
+            res.status(200).send( "Informe general enviado por correo electronico");
         }catch{
             res.status(404).send( "error");
         }
@@ -17,8 +17,7 @@ class GenerarPdfController {
     async listarEventosAnfitrion(req: express.Request, res: express.Response) {
         console.log('genera reporte');
         try{
-            const asistenteService : AsistenteService = new AsistenteService();
-            
+            const asistenteService : AsistenteService = new AsistenteService();          
             asistenteService.procesarUno(req.params.dni);            
             res.status(200).send( "Informe personal enviado por correo electronico");
         }catch{

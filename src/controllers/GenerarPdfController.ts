@@ -7,7 +7,6 @@ class GenerarPdfController {
         console.log('genera reporte');
         try{
             const asistenteService : AsistenteService = new AsistenteService();
-            
             asistenteService.procesar();            
             res.status(200).send( "Informe general enviado por correo electronico");
         }catch{

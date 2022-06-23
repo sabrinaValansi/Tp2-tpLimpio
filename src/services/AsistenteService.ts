@@ -6,9 +6,7 @@ import Evento from '../modelo/Evento.js';
 class AsistenteService {
 
     async procesar(){
-        console.log('Entro en procesar');
         var now = new Date();
-
 
         const archivo = './output/Informe-'+ now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate()+ "-" + now.getHours() + "-" + now.getMinutes() +'.pdf'
 
@@ -21,7 +19,6 @@ class AsistenteService {
         await pdf.crear(await ev,archivo);  
         const email : Email = new Email();
         email.enviar("sabrivalan@hotmail.com","Informe de eventos","Adjuntamos los eventos creados",archivo);
-        console.log('test');
         //await pdf.crear(await evAnf,archivo2);
     }
     
@@ -44,12 +41,10 @@ class AsistenteService {
             linea+="Fecha finalizacion:"+element.fechaHasta+saltoLinea
             linea+="----------------------------------------------"+saltoLinea
         });
-        console.log('archivo creado');
         return Promise.resolve(linea);
     }
 
     async procesarUno(dniAnf : string){
-        console.log('Entro en procesar');
         var now = new Date();
         //var time = now.getTime();
         const archivo = './output/InformeAnfitrion-'+ now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate()+ "-" + now.getHours() + "-" + now.getMinutes() +'.pdf'
@@ -64,7 +59,6 @@ class AsistenteService {
         await pdf.crear(await evAnf,archivo);
         const email : Email = new Email();
         email.enviar("sabrivalan@hotmail.com","Informe de Asistente","Adjuntamos sus eventos personales",archivo);
-        console.log('test2');
     }
 
     async crearTextoAnfitrion(array: Evento[],dni:string):Promise<string> {
@@ -91,6 +85,5 @@ class AsistenteService {
         return Promise.resolve(linea);
     }
     
- 
 }
 export default AsistenteService

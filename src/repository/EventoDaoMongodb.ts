@@ -9,12 +9,10 @@ class EventoDaoMongodb implements Dao<Evento, string> {
     private conectarMongodb: ConectarMongodb = new ConectarMongodb();
 
     async add(element: Evento): Promise<Evento> {
-        console.log('Entre en add');
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('eventos');
         await collection.insertOne(element);
         await this.conectarMongodb.desconectar();
-        console.log('termino en add');
         return Promise.resolve(element);
     }
     async getAll(): Promise<Evento[]> {
@@ -66,18 +64,13 @@ class EventoDaoMongodb implements Dao<Evento, string> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('eventos');
         const findResult = await collection.deleteOne({ id: element.id });
-        console.log('para ver si ssle id'+ findResult.deletedCount);
         await this.conectarMongodb.desconectar();
         let rta = false;
         if (findResult.deletedCount > 0) {
             rta = true;
         }
-        console.log("Estado de rta " + rta);
         await this.conectarMongodb.desconectar();
         return Promise.resolve(rta);
     }
-
-
-
 }
 export { EventoDaoMongodb }

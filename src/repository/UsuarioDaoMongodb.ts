@@ -44,20 +44,16 @@ class UsuarioDaoMongodb implements Dao<Usuario, string> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('usuarios');
         const findResult = await collection.deleteOne({ dni: element.dni });
-        console.log('para ver si ssle id'+ findResult.deletedCount);
         await this.conectarMongodb.desconectar();
         let rta = false;
         if (findResult.deletedCount > 0) {
             rta = true;
         }
-        console.log("Estado de rta " + rta);
         await this.conectarMongodb.desconectar();
         return Promise.resolve(rta);
     }
 
     async update(element: Usuario): Promise<Usuario> {
-        console.log("entro en update" + element);
-
         /* DESPUES VEMOS ESTO */
         /* let index = usuarios.findIndex(usuario => usuario.id == id)
         usuarios.splice(index, 1, usuario) */
@@ -69,12 +65,8 @@ class UsuarioDaoMongodb implements Dao<Usuario, string> {
          this.add(element); */
         //collection.updateOne({dni:element.dni},{$set : {nombre:element.nombre,email:element.email,rol:element.rol}});//ver si funciona!
         //await this.conectarMongodb.desconectar();
-        console.log("salgo en update" + element);
         return Promise.resolve(element);
     }
-
-
-
 }
 
 export { UsuarioDaoMongodb }

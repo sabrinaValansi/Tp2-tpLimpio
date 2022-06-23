@@ -28,7 +28,6 @@ class Email {
                     throw err;
                 } else {
                     console.log(info);
-                    
                 }
             });    
         })

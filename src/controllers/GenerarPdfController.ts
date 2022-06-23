@@ -25,8 +25,6 @@ class GenerarPdfController {
             res.status(404).send( "error");
         }
     }
-
-
 }
 
 export default new GenerarPdfController();

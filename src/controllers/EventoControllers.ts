@@ -30,11 +30,6 @@ class EventoController {
         console.log('entro a delete de controller' + evento.id);
         res.status(200).send( await eventoDaoMongodb.delete(evento));
     } 
-    
-
-
-
-
 
     /* async update(req: express.Request, res: express.Response) {
         const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();

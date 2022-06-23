@@ -7,8 +7,10 @@ class AsistenteService {
 
     async procesar(){
         console.log('Entro en procesar');
-        
-        const archivo = `./output/Informe.pdf`
+        var now = new Date();
+
+
+        const archivo = './output/Informe-'+ now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate()+ "-" + now.getHours() + "-" + now.getMinutes() +'.pdf'
 
         const pdf : Pdf = new Pdf();
         const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();
@@ -18,7 +20,7 @@ class AsistenteService {
 
         await pdf.crear(await ev,archivo);  
         const email : Email = new Email();
-        email.enviar("sabrivalan@hotmail.com","Asunto","Cuerpo mensaje",archivo);
+        email.enviar("sabrivalan@hotmail.com","Informe de eventos","Adjuntamos los eventos creados",archivo);
         console.log('test');
         //await pdf.crear(await evAnf,archivo2);
     }
@@ -48,8 +50,9 @@ class AsistenteService {
 
     async procesarUno(dniAnf : string){
         console.log('Entro en procesar');
-        
-        const archivo = `./output/InformeAnfitrion.pdf`
+        var now = new Date();
+        //var time = now.getTime();
+        const archivo = './output/InformeAnfitrion-'+ now.getFullYear() + "-"+ now.getMonth() + "-" + now.getDate()+ "-" + now.getHours() + "-" + now.getMinutes() +'.pdf'
 
         const pdf : Pdf = new Pdf();
         const eventoDaoMongodb : EventoDaoMongodb = new EventoDaoMongodb();

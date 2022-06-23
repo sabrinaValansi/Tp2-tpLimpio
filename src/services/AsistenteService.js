@@ -14,7 +14,8 @@ class AsistenteService {
     procesar() {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('Entro en procesar');
-            const archivo = `./output/Informe.pdf`;
+            var now = new Date();
+            const archivo = './output/Informe-' + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + '.pdf';
             const pdf = new Pdf();
             const eventoDaoMongodb = new EventoDaoMongodb();
             const eventos = yield eventoDaoMongodb.getAll();
@@ -22,7 +23,7 @@ class AsistenteService {
             //const evAnf=this.crearTextoAnfitrion(eventos,"3333")
             yield pdf.crear(yield ev, archivo);
             const email = new Email();
-            email.enviar("sabrivalan@hotmail.com", "Asunto", "Cuerpo mensaje", archivo);
+            email.enviar("sabrivalan@hotmail.com", "Informe de eventos", "Adjuntamos los eventos creados", archivo);
             console.log('test');
             //await pdf.crear(await evAnf,archivo2);
         });
@@ -54,7 +55,9 @@ class AsistenteService {
     procesarUno(dniAnf) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('Entro en procesar');
-            const archivo = `./output/InformeAnfitrion.pdf`;
+            var now = new Date();
+            //var time = now.getTime();
+            const archivo = './output/InformeAnfitrion-' + now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes() + '.pdf';
             const pdf = new Pdf();
             const eventoDaoMongodb = new EventoDaoMongodb();
             const eventos = yield eventoDaoMongodb.getAll();

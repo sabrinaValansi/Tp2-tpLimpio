@@ -57,9 +57,9 @@ class UsuarioDaoMongodb {
             const collection = db.collection('usuarios');
             const findResult = yield collection.deleteOne({ dni: element.dni });
             yield this.conectarMongodb.desconectar();
-            let rta = false;
+            let rta = "Usuario no encontrado";
             if (findResult.deletedCount > 0) {
-                rta = true;
+                rta = "Usuario Eliminado";
             }
             yield this.conectarMongodb.desconectar();
             return Promise.resolve(rta);

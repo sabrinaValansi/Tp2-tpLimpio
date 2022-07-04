@@ -6,7 +6,7 @@ interface Dao<E,K> {
 
     get: (Clave : K) => Promise<E>;
 
-    delete: (Element : E) => Promise<boolean>;
+    delete: (Element : E) => Promise<String>;
 
 }
 

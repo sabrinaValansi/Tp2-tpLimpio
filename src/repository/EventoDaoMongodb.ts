@@ -60,14 +60,14 @@ class EventoDaoMongodb implements Dao<Evento, string> {
         await this.conectarMongodb.desconectar();
         return Promise.resolve(rta);
     } */
-    async delete(element: Evento): Promise<boolean> {
+    async delete(element: Evento): Promise<String> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('eventos');
         const findResult = await collection.deleteOne({ id: element.id });
         await this.conectarMongodb.desconectar();
-        let rta = false;
+        let rta = "Evento no encontrado";
         if (findResult.deletedCount > 0) {
-            rta = true;
+            rta = "Evento eliminado";
         }
         await this.conectarMongodb.desconectar();
         return Promise.resolve(rta);

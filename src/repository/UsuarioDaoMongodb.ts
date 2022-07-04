@@ -40,14 +40,14 @@ class UsuarioDaoMongodb implements Dao<Usuario, string> {
         return Promise.resolve(usuario);
     }
 
-    async delete(element: Usuario): Promise<boolean> {
+    async delete(element: Usuario): Promise<String> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('usuarios');
         const findResult = await collection.deleteOne({ dni: element.dni });
         await this.conectarMongodb.desconectar();
-        let rta = false;
+        let rta = "Usuario no encontrado";
         if (findResult.deletedCount > 0) {
-            rta = true;
+            rta = "Usuario Eliminado";
         }
         await this.conectarMongodb.desconectar();
         return Promise.resolve(rta);

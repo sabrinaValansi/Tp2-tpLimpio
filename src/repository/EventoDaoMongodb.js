@@ -76,9 +76,9 @@ class EventoDaoMongodb {
             const collection = db.collection('eventos');
             const findResult = yield collection.deleteOne({ id: element.id });
             yield this.conectarMongodb.desconectar();
-            let rta = false;
+            let rta = "Evento no encontrado";
             if (findResult.deletedCount > 0) {
-                rta = true;
+                rta = "Evento eliminado";
             }
             yield this.conectarMongodb.desconectar();
             return Promise.resolve(rta);

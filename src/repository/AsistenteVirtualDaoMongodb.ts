@@ -43,14 +43,14 @@ class AsistenteVirtualDaoMongodb implements Dao<AsistenteVirtual, string> {
         return Promise.resolve(asistente);
     }
 
-    async delete(element: AsistenteVirtual): Promise<boolean> {
+    async delete(element: AsistenteVirtual): Promise<String> {
         const db = await this.conectarMongodb.conectar();
         const collection = db.collection('asistentes');
         const findResult = await collection.deleteOne({ email: element.email });
         await this.conectarMongodb.desconectar();
-        let rta = false;
+        let rta = "Asistente no encontrado";
         if (findResult.deletedCount > 0) {
-            rta = true;
+            rta = "Asistente eliminado";
         }
         console.log("Estado de rta " + rta);
         await this.conectarMongodb.desconectar();

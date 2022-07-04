@@ -62,9 +62,9 @@ class AsistenteVirtualDaoMongodb {
             const collection = db.collection('asistentes');
             const findResult = yield collection.deleteOne({ email: element.email });
             yield this.conectarMongodb.desconectar();
-            let rta = false;
+            let rta = "Asistente no encontrado";
             if (findResult.deletedCount > 0) {
-                rta = true;
+                rta = "Asistente eliminado";
             }
             console.log("Estado de rta " + rta);
             yield this.conectarMongodb.desconectar();
